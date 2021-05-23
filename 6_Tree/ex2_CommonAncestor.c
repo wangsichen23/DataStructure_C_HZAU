@@ -6,7 +6,8 @@
 
 typedef char DataType;
 
-typedef struct Node{
+typedef struct Node
+{
 	DataType data;
 	struct Node *LChild;
 	struct Node *RChild;
