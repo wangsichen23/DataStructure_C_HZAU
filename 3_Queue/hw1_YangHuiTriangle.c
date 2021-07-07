@@ -1,3 +1,17 @@
+/*
+ã€é—®é¢˜æè¿°ã€‘
+æ¨è¾‰ä¸‰è§’å½¢çš„æ‰“å°ï¼Œè¯·ç”¨å¾ªç¯é˜Ÿåˆ—å®ç°ã€‚
+
+ã€æ ·ä¾‹è¾“å…¥ã€‘
+4
+
+ã€æ ·ä¾‹è¾“å‡ºã€‘
+1
+1 1
+1 2 1
+1 3 3 1
+*/
+
 #include <stdio.h>
 
 #define OK  1
@@ -8,75 +22,75 @@
 #define MAXSIZE 50
 
 typedef struct
-{
-	int element[MAXSIZE];  /* ¶ÓÁĞµÄÔªËØ¿Õ¼ä*/
-	int front;  /*Í·Ö¸ÕëÖ¸Ê¾Æ÷*/
-	int rear;  /*Î²Ö¸ÕëÖ¸Ê¾Æ÷*/
+{//å®šä¹‰å¾ªç¯é˜Ÿåˆ—
+	int element[MAXSIZE]; //é˜Ÿåˆ—çš„å…ƒç´ ç©ºé—´
+	int front; //å¤´æŒ‡é’ˆ
+	int rear; //å°¾æŒ‡é’ˆæŒ‡ç¤ºå™¨
 }SeqQueue;
 
 void InitQueue(SeqQueue *Q)
-{
+{//åˆå§‹åŒ–å¾ªç¯é˜Ÿåˆ—
 	Q->front=Q->rear=0;
 }
 
 int IsEmpty(SeqQueue *Q)
-{
+{//åˆ¤æ–­å¾ªç¯é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
     if(Q->front==Q->rear)
         return(TRUE);
     else
         return(FALSE);
 }
 
-int EnterQueue(SeqQueue *Q, int x)
-{
-	if((Q->rear+1)%MAXSIZE==Q->front)  /*¶ÓÁĞÒÑ¾­ÂúÁË*/
+int EnterQueue(SeqQueue *Q,int x)
+{//å¾ªç¯é˜Ÿåˆ—å…ƒç´ è¾“å…¥
+	if((Q->rear+1)%MAXSIZE==Q->front) //é˜Ÿåˆ—å·²ç»æ»¡äº†
 		return(FALSE);
 	Q->element[Q->rear]=x;
-	Q->rear=(Q->rear+1)%MAXSIZE;  /* ÖØĞÂÉèÖÃ¶ÓÎ²Ö¸Õë */
-	return(TRUE);  /*²Ù×÷³É¹¦*/
+	Q->rear=(Q->rear+1)%MAXSIZE; //é‡æ–°è®¾ç½®é˜Ÿå°¾æŒ‡é’ˆ
+	return(TRUE);
 }
 
-int DeleteQueue(SeqQueue *Q, int *x)
-{
-	if(Q->front==Q->rear)  /*¶ÓÁĞÎª¿Õ*/
+int DeleteQueue(SeqQueue *Q,int *x)
+{//åˆ é™¤é˜Ÿåˆ—çš„é˜Ÿå¤´å…ƒç´ ï¼Œç”¨xè¿”å›å…¶å€¼
+	if(Q->front==Q->rear) //é˜Ÿåˆ—ä¸ºç©º
 		return(FALSE);
 	*x=Q->element[Q->front];
-	Q->front=(Q->front+1)%MAXSIZE;  /*ÖØĞÂÉèÖÃ¶ÓÍ·Ö¸Õë*/
-	return(TRUE);  /*²Ù×÷³É¹¦*/
+	Q->front=(Q->front+1)%MAXSIZE; //é‡æ–°è®¾ç½®é˜Ÿå¤´æŒ‡é’ˆ
+	return(TRUE);
 }
 
-int GetHead(SeqQueue *Q, int *x)
-{
-	if(Q->front==Q->rear)  /*¶ÓÁĞÎª¿Õ*/
+int GetHead(SeqQueue *Q,int *x)
+{//è¾“å‡ºé˜Ÿåˆ—çš„é˜Ÿå¤´å…ƒç´ ï¼Œç”¨xè¿”å›å…¶å€¼
+	if(Q->front==Q->rear) //é˜Ÿåˆ—ä¸ºç©º
 		return(FALSE);
 	*x=Q->element[Q->front];
-	return(TRUE);  /*²Ù×÷³É¹¦*/
+	return(TRUE);
 }
 
 void YangHuiTriangle(int n)
-{
+{//å¾ªç¯é˜Ÿåˆ—æ‰“å°æ¨è¾‰ä¸‰è§’
 	int i,j,temp=0,x=0;
 	SeqQueue Q;
 	InitQueue(&Q);
-	EnterQueue(&Q,1);  /* µÚÒ»ĞĞÔªËØÈë¶Ó*/
-	for(i=2;i<=n;i++)   /* ²úÉúµÚnĞĞÔªËØ²¢Èë¶Ó£¬Í¬Ê±´òÓ¡µÚn-1ĞĞµÄÔªËØ*/
-	{
-		EnterQueue(&Q,1);   /* µÚnĞĞµÄµÚÒ»¸öÔªËØÈë¶Ó*/
-		for(j=1;j<=i-2;j++)  /* ÀûÓÃ¶ÓÖĞµÚn-1ĞĞÔªËØ²úÉúµÚnĞĞµÄÖĞ¼än-2¸öÔªËØ²¢Èë¶Ó*/
-		{
+	EnterQueue(&Q,1); //ç¬¬ä¸€è¡Œå…ƒç´ å…¥é˜Ÿ
+	for(i=2;i<=n;i++)
+	{//äº§ç”Ÿç¬¬nè¡Œå…ƒç´ å¹¶å…¥é˜Ÿï¼ŒåŒæ—¶æ‰“å°ç¬¬n-1è¡Œçš„å…ƒç´ 
+		EnterQueue(&Q,1); //ç¬¬nè¡Œçš„ç¬¬ä¸€ä¸ªå…ƒç´ å…¥é˜Ÿ
+		for(j=1;j<=i-2;j++)
+		{//åˆ©ç”¨é˜Ÿä¸­ç¬¬n-1è¡Œå…ƒç´ äº§ç”Ÿç¬¬nè¡Œçš„ä¸­é—´n-2ä¸ªå…ƒç´ å¹¶å…¥é˜Ÿ
 			DeleteQueue(&Q,&temp);
-			printf("%d ",temp);     /* ´òÓ¡µÚn-1ĞĞµÄÔªËØ*/
+			printf("%d ",temp); //æ‰“å°ç¬¬n-1è¡Œçš„å…ƒç´ 
 			GetHead(&Q,&x);
-			temp=temp+x;      /*ÀûÓÃ¶ÓÖĞµÚn-1ĞĞÔªËØ²úÉúµÚnĞĞÔªËØ*/
-			EnterQueue(&Q,temp);
+			temp=temp+x; //åˆ©ç”¨é˜Ÿä¸­ç¬¬n-1è¡Œå…ƒç´ äº§ç”Ÿç¬¬nè¡Œå…ƒç´ 
+			EnterQueue(&Q,temp); //ç¬¬nè¡Œå…ƒç´ å…¥é˜Ÿ
 		}
 		DeleteQueue(&Q,&x);
-		printf("%d ",x);    /* ´òÓ¡µÚn-1ĞĞµÄ×îºóÒ»¸öÔªËØ*/
-		EnterQueue(&Q,1);   /* µÚnĞĞµÄ×îºóÒ»¸öÔªËØÈë¶Ó*/
+		printf("%d ",x); //æ‰“å°ç¬¬n-1è¡Œçš„æœ€åä¸€ä¸ªå…ƒç´ 
 		printf("\n");
+		EnterQueue(&Q,1); //ç¬¬nè¡Œçš„æœ€åä¸€ä¸ªå…ƒç´ å…¥é˜Ÿ
 	}
 	while(!IsEmpty(&Q))
-    {
+    {//æ‰“å°æœ€åä¸€è¡Œå…ƒç´ 
         DeleteQueue(&Q,&x);
         printf("%d ",x);
     }
